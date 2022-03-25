@@ -1,0 +1,160 @@
+@import "smart-grid";
+
+/*colors*/
+@primary: #45b984;
+@primary-light: #45b9847d;
+@primary-active: #13ce66;
+@dark: #333;
+@light: #fff;
+@dark-light: #777;
+@dark-lighter: #eee;
+@error: #e11617;
+@warn: #ffae00;
+@warn-light: #ffae007d;
+@link: #3b91ff7d;
+@link-hover: #3b91ff;
+/*spacing*/
+@space-main: 24px;
+@space-half: 12px;
+
+h1 {
+  color: @primary;
+}
+
+.spacer {
+  .col();
+  .size(1);
+  .sm-block({
+    display: none;
+  })
+}
+
+button, .btn {
+  border: none;
+  color: @light;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background: @primary;
+  &:hover {
+    background: @primary-active;
+  }
+  &.warn {
+    background: @warn;
+    opacity: .9;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+input[type="text"] {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 15px;
+  border: 1px solid @dark-light;
+  &.no-border {
+    border: none;
+    border-bottom: 1px solid @dark-light;
+    &:focus {
+      border: none;
+      background: unset;
+      outline: none;
+      box-shadow: unset;
+      border-bottom: 1px solid @primary;
+    }
+  }
+  &.error {
+    border-bottom: 1px solid @warn;
+    &:focus {
+      border-bottom: 1px solid @warn;
+    }
+  }
+
+}
+
+
+section, header, footer, .container {
+  box-sizing: border-box;
+  width: 100%;
+  > div {
+    .wrapper();
+    > div {
+      .row-flex();
+    }
+  }
+}
+.wpr {
+  .wrapper();
+}
+.row {
+  width: 100%;
+  .row-flex();
+}
+.cell {
+  .col();
+  .size-lg(6)
+}
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: @light;
+  &-circular {
+    display: block;
+    width: 42px;
+    height: 42px;
+    color: #000;
+    transform: translate(-50%,-50%);
+    > svg {
+      animation: loading-rotate 2s linear infinite;
+      width: 42px;
+      height: 42px;
+      transition: opacity .5s;
+      transform-origin: center center;
+      > circle {
+        animation: loading-path-rotate 1.5s ease-in-out infinite;
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: 0;
+        stroke-width: 2;
+        stroke: @primary;
+        stroke-linecap: round;
+      }
+    }
+  }
+
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+@keyframes loading-path-rotate {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0
+  }
+
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35px
+  }
+
+  to {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124px
+  }
+}
